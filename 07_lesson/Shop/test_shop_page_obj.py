@@ -7,6 +7,7 @@ from pages.products_page import ProductsPage
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
 
+
 @pytest.fixture()
 def driver():
     driver = webdriver.Chrome(
@@ -39,6 +40,7 @@ def test_shop(driver):
     checkout_page.fill_checkout_form("Екатерина", "Кочетова", "440000")
     # Проверка итоговой суммы и сравнение
     total_amount = checkout_page.get_total_amount()
-    assert total_amount == "58.29", f"Ожидалось $58.29, но получилось ${total_amount}"
+    assert total_amount == "58.29", f"Ожидалось $58.29, но получилось ${
+        total_amount
+    }"
     print(f"✅ Итоговая сумма корректна: ${total_amount}")
-
