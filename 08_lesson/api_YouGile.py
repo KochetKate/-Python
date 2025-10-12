@@ -53,7 +53,7 @@ class YouGile:
         return resp
 
     def edit_project(self, project_id, new_deleted, new_title, new_users):
-        # Удаление проекта
+        # Изменение/удаление проекта
         key = self.token
         headers = {
             'Authorization': f'Bearer {key}',
