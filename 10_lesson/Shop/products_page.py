@@ -10,17 +10,16 @@ class ProductsPage:
     def __init__(self, driver) -> None:
         """
         Инициализация страницы товаров.
-
-        driver: WebDriver - Экземпляр WebDriver
+        :param driver: WebDriver - Экземпляр WebDriver
         """
         self.driver = driver
 
     @allure.step("Добавить товар в корзину")
-    def add_product_to_cart(self, product_id) -> None:
+    def add_product_to_cart(self, product_id: str) -> None:
         """
         Добавить товар в корзину по ID.
-
-        product_id: str - ID товара
+        :param product_id: ID товара (str)
+        :return: None
         """
         self.driver.find_element(By.ID, product_id).click()
 
@@ -28,5 +27,6 @@ class ProductsPage:
     def go_to_cart(self) -> None:
         """
         Перейти в корзину покупок.
+        :return: None
         """
         self.driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()

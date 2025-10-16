@@ -10,7 +10,7 @@ class LoginPage:
         """
         Инициализация страницы авторизации.
 
-        driver: WebDriver - Экземпляр WebDriver
+        :param driver: WebDriver - Экземпляр WebDriver
         """
         self.driver = driver
         self.driver.maximize_window()
@@ -19,13 +19,12 @@ class LoginPage:
         self.button = (By.CSS_SELECTOR, "input[type='submit']")
 
     @allure.step("Выполнить авторизацию")
-    def login(self, user_t, password_t) -> None:
+    def login(self, user_t: str, password_t: str) -> None:
         """
         Выполнить авторизацию в системе.
-
-        user_t: str - Логин пользователя
-        password_t: str - Пароль пользователя
-        Returns: None
+        :param user_t: Логин пользователя (str)
+        :param password_t: Пароль пользователя (str)
+        :rtype: None
         """
         self.driver.find_element(*self.user).send_keys(user_t)
         self.driver.find_element(*self.password).send_keys(password_t)

@@ -9,8 +9,7 @@ class CheckoutPage:
     def __init__(self, driver) -> None:
         """
         Инициализация страницы оформления заказа.
-
-        driver: WebDriver - Экземпляр WebDriver
+        :param driver: WebDriver - Экземпляр WebDriver
         """
         self.driver = driver
         # Локаторы для данных
@@ -21,13 +20,14 @@ class CheckoutPage:
         self.total = (By.CLASS_NAME, "summary_total_label")
 
     @allure.step("Заполнить форму оформления заказа")
-    def fill_checkout_form(self, first, last, code) -> None:
+    def fill_checkout_form(self, first: str, last: str, code: str) -> None:
         """
         Заполнить форму данными для доставки.
 
-        first: str - Имя
-        last: str - Фамилия  
-        code: str - Почтовый индекс
+        :param first: Имя пользователя (str)
+        :param last: Фамилия пользователя (str)
+        :param code: Почтовый индекс пользователя (str)
+        :return: None
         """
         self.driver.find_element(*self.first_name).send_keys(first)
         self.driver.find_element(*self.last_name).send_keys(last)
@@ -38,6 +38,8 @@ class CheckoutPage:
     def get_total_amount(self) -> str:
         """
         Получить итоговую стоимость заказа.
+        :return: Итоговая стоимость заказа
+        :rtype: str
         """
         total_text = self.driver.find_element(*self.total).text
         return total_text.replace("Total: $", "")

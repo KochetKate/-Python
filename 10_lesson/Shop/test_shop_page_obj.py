@@ -15,7 +15,7 @@ def driver():
     """
     Фикстура для инициализации браузера.
 
-    Yields: WebDriver - Экземпляр WebDriver
+    :yields: WebDriver - Экземпляр WebDriver
     """
     driver = webdriver.Chrome(
         service=ChromeService(ChromeDriverManager().install())
@@ -33,30 +33,24 @@ def test_shop(driver):
     """
     Тест полного цикла оформления заказа в интернет-магазине.
     """
-    with allure.step("Выполнить авторизацию"):
-        login_page = LoginPage(driver)
-        login_page.login("standard_user", "secret_sauce")
+    login_page = LoginPage(driver)
+    login_page.login("standard_user", "secret_sauce")
 
-    with allure.step("Добавить товары в корзину"):
-        products_to_cart = ProductsPage(driver)
-        products_to_cart.add_product_to_cart("add-to-cart-sauce-labs-backpack")
-        products_to_cart.add_product_to_cart("add-to-cart-sauce-labs-bolt-t-shirt")
-        products_to_cart.add_product_to_cart("add-to-cart-sauce-labs-onesie")
+    products_to_cart = ProductsPage(driver)
+    products_to_cart.add_product_to_cart("add-to-cart-sauce-labs-backpack")
+    products_to_cart.add_product_to_cart("add-to-cart-sauce-labs-bolt-t-shirt")
+    products_to_cart.add_product_to_cart("add-to-cart-sauce-labs-onesie")
     
-    with allure.step("Перейти в корзину"):
-        products_to_cart.go_to_cart()
+    products_to_cart.go_to_cart()
 
-    with allure.step("Начать оформление заказа"):
-        cart_page = CartPage(driver)
-        cart_page.proceed_to_checkout()
+    cart_page = CartPage(driver)
+    cart_page.proceed_to_checkout()
 
-    with allure.step("Заполнить данные для доставки"):
-        checkout_page = CheckoutPage(driver)
-        checkout_page.fill_checkout_form("Екатерина", "Кочетова", "440000")
+    checkout_page = CheckoutPage(driver)
+    checkout_page.fill_checkout_form("Екатерина", "Кочетова", "440000")
     
-    with allure.step("Проверить итоговую сумму заказа"):
-        total_amount = checkout_page.get_total_amount()
-        assert total_amount == "58.29", f"Ожидалось $58.29, но получилось ${
-            total_amount
-        }"
-        print(f"✅ Итоговая сумма корректна: ${total_amount}")
+    total_amount = checkout_page.get_total_amount()
+    assert total_amount == "58.29", f"Ожидалось $58.29, но получилось ${
+        total_amount
+    }"
+    print(f"✅ Итоговая сумма корректна: ${total_amount}")

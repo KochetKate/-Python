@@ -10,7 +10,7 @@ class CartPage:
         """
         Инициализация страницы корзины.
 
-        driver: WebDriver - Экземпляр WebDriver
+        :param driver: WebDriver - Экземпляр WebDriver
         """
         self.driver = driver
         self.checkout_button = (By.ID, "checkout")
@@ -19,5 +19,6 @@ class CartPage:
     def proceed_to_checkout(self) -> None:
         """
         Нажать кнопку оформления заказа.
+        :return: None
         """
         self.driver.find_element(*self.checkout_button).click()
